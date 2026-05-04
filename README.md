@@ -14,7 +14,6 @@ This repository provides the Python implementation of the DQN and Learning-based
 
 
 ## Path Configuration:
-
 Before running the code, set the project root directory in configuration.py:
       root_path = "E:/CBQ" if os.name == "nt" else "/home/ache/dongz/CBQ"
 
