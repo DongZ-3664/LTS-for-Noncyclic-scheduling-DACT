@@ -58,24 +58,6 @@ Each wafer type includes:
 >     windows : windows[i][0] is the processing time required by its $i$-th stage.
 
 
-Example:
-
-###
-[
-    {
-        "id": "0",
-        "nums": 5,
-        "route": [1, 2, 3],
-        "windows": [[80, 1000], [90, 1000], [75, 1000]]
-    },
-    {
-        "id": "1",
-        "nums": 5,
-        "route": [4, 5, 6],
-        "windows": [[140, 1000], [160, 1000], [150, 1000]]
-    }
-]
-###
 
 The instance file should be placed under:
 ###
@@ -112,7 +94,7 @@ The code is executed through **main.py**.
 
 
 
-### 6. Train the DQN Agent
+## 6. Train the DQN Agent
 To train the DQN/D3QN agent, run:
 ###
       python main.py \
@@ -136,8 +118,7 @@ The trained model is saved to:
       nets/D3QN/well_trained/well_trained_qnet.pth
 ###
 
-### 8. Pure DQN Testing
-
+## 7. Pure DQN Testing
 Pure DQN testing uses the trained Q-network directly. At each decision step, the admissible action with the largest Q-value is selected.
 
 Example:
@@ -147,14 +128,14 @@ Example:
               -mt D3QN \
               -dv cpu \
               -ns XL \
-              -sp 3 \
-              -lr 0.001 \
+              -sp 6 \
+              -lr 0.005 \
               -bs 128 \
-              -bf 10000 \
-              -ex 0.075 \
+              -bf 14000 \
+              -ex 0.09 \
               -es 25000 \
-              -gm 0.85 \
-              -tn 25 \
+              -gm 0.90 \
+              -tn 15 \
               -W 10 \
               -R 2 \
               -TQ 1 \
@@ -163,49 +144,48 @@ Example:
 ###
 
 The program loads the trained model from:
-
-nets/D3QN/well_trained/well_trained_qnet.pth
+###
+      nets/D3QN/well_trained/well_trained_qnet.pth
+###
 The testing log is saved to:
+###
+      logs/D3QN/testing/R_K_{K}/W_{W}_R_{R}/TQ_{TQ}/ins_{ID}.csv
+###
 
-logs/D3QN/testing/R_K_{K}/W_{W}_R_{R}/TQ_{TQ}/ins_{ID}.csv
+## 8. LTS Testing
 
-
-### 9. LTS Testing
-
-To enable Learning-based Tree Search, run testing mode with:
--mc mcts
-
-python main.py \
-  -md testing \
-  -mc mcts \
-  -mt D3QN \
-  -dv cpu \
-  -ns XL \
-  -sp 3 \
-  -lr 0.001 \
-  -bs 128 \
-  -bf 10000 \
-  -ex 0.075 \
-  -es 25000 \
-  -gm 0.85 \
-  -tn 25 \
-  -W 10 \
-  -R 2 \
-  -TQ 1 \
-  -I 11 \
-  -K 1
-
+To enable Learning-based Tree Search, run testing mode with: $-mc mcts$
+###
+      python main.py \
+            -md testing \
+            -mc mcts \
+            -mt D3QN \
+            -dv cpu \
+            -ns XL \
+            -sp 6 \
+            -lr 0.005 \
+            -bs 128 \
+            -bf 14000 \
+            -ex 0.009 \
+            -es 25000 \
+            -gm 0.90 \
+            -tn 15 \
+            -W 10 \
+            -R 2 \
+            -TQ 1 \
+            -I 11 \
+            -K 1
+###
 
 The default LTS parameters are defined in treeSearch.py:
 | Parameter            | Description                                | Default |
 | -------------------- | ------------------------------------------ | ------- |
-| `ts_max_depth`       | Maximum tree depth                         | `6`     |
+| `ts_max_depth`       | Maximum tree search depth                  | `6`     |
 | `ts_n_sim`           | Number of simulations per decision step    | `192`   |
 | `ts_rollout_depth`   | Maximum rollout depth                      | `30`    |
 | `ts_ucb_c`           | Exploration coefficient in UCB             | `0.3`   |
 | `ts_use_lower_bound` | Whether to use lower-bound tail estimation | `True`  |
-| `ts_debug`           | Whether to print search diagnostics        | `True`  |
-| `ts_rollout_batch`   | Batch size for batched rollout             | `8`     |
+
 
 Currently, these LTS parameters are set inside treeSearch.py. To modify them from the command line, add the corresponding arguments in parse_arguments() in main.py.
 
