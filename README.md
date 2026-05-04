@@ -12,25 +12,25 @@ This repository provides the Python procudure of the deep Q-network (DQN) and th
       Logging of training and testing results
 
 ## 2.Project Structure
-###
-LTS-for-Noncyclic-scheduling-DACT/
-│
-├── codes
-│
-├── instances/
-│   └── W_10_R_2/
-│       └── TQ_1/
-│           └── ins_11.json
-│
-├── nets/
-│   └── D3QN/
-│       └── well_trained/
-│           └── well_trained_qnet.pth
-│
-├── logs/
-│
-└── solutions/
-###
+
+>      LTS-for-Noncyclic-scheduling-DACT/
+>      │
+>      ├── codes
+>      │   └── xxxx.py
+>      ├── instances/
+>      │   └── W_10_R_2/
+>      │       └── TQ_1/
+>      │           └── ins_11.json
+>      │
+>      ├── nets/
+>      │   └── D3QN/
+>      │       └── well_trained/
+>      │           └── well_trained_qnet.pth
+>      │
+>      ├── logs/
+>      │
+>      └── solutions/
+
 
 ## 3.Path Configuration:
 ###
