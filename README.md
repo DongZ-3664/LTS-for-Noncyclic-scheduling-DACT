@@ -12,38 +12,11 @@ This repository provides the Python implementation of the DQN and Learning-based
 
 ## Project Structure
 
-A recommended project structure is as follows:
-      LTS-for-Noncyclic-scheduling-DACT/
-      │
-      ├── main.py
-      ├── configuration.py
-      ├── Instance.py
-      ├── wafer.py
-      ├── clusterTool.py
-      ├── DQN.py
-      ├── training.py
-      ├── testing.py
-      ├── treeSearch.py
-      ├── treeNode.py
-      ├── Solution.py
-      │
-      ├── instances/
-      │   └── W_10_R_2/
-      │       └── TQ_1/
-      │           └── ins_11.json
-      │
-      ├── nets/
-      │   └── D3QN/
-      │       └── well_trained/
-      │           └── well_trained_qnet.pth
-      │
-      ├── logs/
-      │
-      └── solutions/
 
+## Path Configuration
 
-
-
+Before running the code, set the project root directory in configuration.py:
+      root_path = "E:/CBQ" if os.name == "nt" else "/home/ache/dongz/CBQ"
 
 
 
