@@ -154,7 +154,7 @@ The testing log is saved to:
 
 ## 8. LTS Testing
 
-To enable Learning-based Tree Search, run testing mode with: $-mc mcts$
+To enable Learning-based Tree Search, run testing mode with: **-mc mcts**
 ###
       python main.py \
             -md testing \
