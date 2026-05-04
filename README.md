@@ -30,10 +30,10 @@ All input instances, trained networks, logs, and solution files are loaded from 
 Instances are stored as JSON files. Each file contains a list of wafer types.
 Each wafer type includes:
 
->     **id**: wafer type ID
->     **nums**: number of wafers of this type
->     **route**: processing route
->      **windows**: windows[i][0] is the processing time required by its $i$-th stage.
+>     id      : wafer type ID
+>     nums    : number of wafers of this type
+>     route   : processing route
+>     windows : windows[i][0] is the processing time required by its $i$-th stage.
 
 
 
