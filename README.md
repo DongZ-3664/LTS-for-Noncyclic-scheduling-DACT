@@ -20,7 +20,7 @@ This repository provides the Python procudure of the deep Q-network (DQN) and th
 >      ├── instances/
 >      │   └── W_10_R_2/
 >      │       └── TQ_1/
->      │           └── ins_11.json
+>      │           └── ins_1.json
 >      │
 >      ├── nets/
 >      │   └── D3QN/
@@ -33,15 +33,18 @@ This repository provides the Python procudure of the deep Q-network (DQN) and th
 
 
 ## 3.Path Configuration:
-###
 Before running the code, set the project root directory in configuration.py:
-      root_path = "E:/CBQ" if os.name == "nt" else "/home/ache/dongz/CBQ"
-
+###      
+      root_path = "E:/CBQ" if os.name == "nt" else "~/CBQ"
+###
 Modify it to your local repository path. For example: 
+###
       root_path = "/home/user/LTS-for-Noncyclic-scheduling-DACT"
+###
 or on Windows:
+###
       root_path = "D:/LTS-for-Noncyclic-scheduling-DACT"
-
+###
 All input instances, trained networks, logs, and solution files are loaded from or saved to paths under **root_path**.
 
 
