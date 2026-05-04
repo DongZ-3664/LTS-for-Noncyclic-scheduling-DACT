@@ -1,6 +1,7 @@
 # LTS-for-Noncyclic-scheduling-DACT
 
-This repository provides the Python implementation of the DQN and Learning-based Tree Search (LTS) algorithms for the paper 《noncyclic scheduling problem of dual-armed cluster tools with multi-type wafer fabrication and chamber cleaning requirements》
+This repository provides the Python procudure of the deep Q-network (DQN) and the Learning-based Tree Search (LTS) algorithm for the paper 
+**noncyclic scheduling problem of dual-armed cluster tools with multi-type wafer fabrication and chamber cleaning requirements**
 
 ## 1.The procedure supports:
       DQN training
@@ -11,7 +12,25 @@ This repository provides the Python implementation of the DQN and Learning-based
       Logging of training and testing results
 
 ## 2.Project Structure
-
+###
+LTS-for-Noncyclic-scheduling-DACT/
+│
+├── codes
+│
+├── instances/
+│   └── W_10_R_2/
+│       └── TQ_1/
+│           └── ins_11.json
+│
+├── nets/
+│   └── D3QN/
+│       └── well_trained/
+│           └── well_trained_qnet.pth
+│
+├── logs/
+│
+└── solutions/
+###
 
 ## 3.Path Configuration:
 ###
@@ -87,6 +106,118 @@ The code is executed through **main.py**.
 | `-TQ`    | Type-quantity pattern ID                                            | `1`       |
 | `-I`     | Instance ID                                                         | `11`      |
 | `-K`     | Cleaning frequency / threshold                                      | `1`       |
+
+
+
+### 6. Train the DQN Agent
+To train the DQN/D3QN agent, run:
+###
+      python main.py \
+            -md training \
+            -mt D3QN \
+            -dv cpu \
+            -ns XL \
+            -sp 3 \
+            -lr 0.001 \
+            -bs 128 \
+            -bf 10000 \
+            -ex 0.075 \
+            -es 25000 \
+            -gm 0.85 \
+            -tn 25
+###
+
+
+The trained model is saved to:
+###
+      nets/D3QN/well_trained/well_trained_qnet.pth
+###
+
+### 8. Pure DQN Testing
+
+Pure DQN testing uses the trained Q-network directly. At each decision step, the admissible action with the largest Q-value is selected.
+
+Example:
+###
+      python main.py \
+              -md testing \
+              -mt D3QN \
+              -dv cpu \
+              -ns XL \
+              -sp 3 \
+              -lr 0.001 \
+              -bs 128 \
+              -bf 10000 \
+              -ex 0.075 \
+              -es 25000 \
+              -gm 0.85 \
+              -tn 25 \
+              -W 10 \
+              -R 2 \
+              -TQ 1 \
+              -I 11 \
+              -K 1
+###
+
+The program loads the trained model from:
+
+nets/D3QN/well_trained/well_trained_qnet.pth
+The testing log is saved to:
+
+logs/D3QN/testing/R_K_{K}/W_{W}_R_{R}/TQ_{TQ}/ins_{ID}.csv
+
+
+### 9. LTS Testing
+
+To enable Learning-based Tree Search, run testing mode with:
+-mc mcts
+
+python main.py \
+  -md testing \
+  -mc mcts \
+  -mt D3QN \
+  -dv cpu \
+  -ns XL \
+  -sp 3 \
+  -lr 0.001 \
+  -bs 128 \
+  -bf 10000 \
+  -ex 0.075 \
+  -es 25000 \
+  -gm 0.85 \
+  -tn 25 \
+  -W 10 \
+  -R 2 \
+  -TQ 1 \
+  -I 11 \
+  -K 1
+
+
+The default LTS parameters are defined in treeSearch.py:
+| Parameter            | Description                                | Default |
+| -------------------- | ------------------------------------------ | ------- |
+| `ts_max_depth`       | Maximum tree depth                         | `6`     |
+| `ts_n_sim`           | Number of simulations per decision step    | `192`   |
+| `ts_rollout_depth`   | Maximum rollout depth                      | `30`    |
+| `ts_ucb_c`           | Exploration coefficient in UCB             | `0.3`   |
+| `ts_use_lower_bound` | Whether to use lower-bound tail estimation | `True`  |
+| `ts_debug`           | Whether to print search diagnostics        | `True`  |
+| `ts_rollout_batch`   | Batch size for batched rollout             | `8`     |
+
+Currently, these LTS parameters are set inside treeSearch.py. To modify them from the command line, add the corresponding arguments in parse_arguments() in main.py.
+
+
+### 10. Output Files
+Testing logs
+
+Testing logs are saved as CSV files under:
+###
+      logs/{method}/testing/R_K_{K}/W_{W}_R_{R}/TQ_{TQ}/ins_{ID}.csv
+###
+For LTS testing, logs are saved under the mcts testing directory.
+
+
+
 
 
 
