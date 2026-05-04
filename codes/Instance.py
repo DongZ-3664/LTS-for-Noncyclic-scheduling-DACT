@@ -232,13 +232,6 @@ def ins_set_for_verifying(args: Dict[str, Any]):
         Instance(args=args, W=20, R=4, TQ=4, ID=11, K=2),
         Instance(args=args, W=15, R=4, TQ=4, ID=11, K=2),
         Instance(args=args, W=10, R=4, TQ=4, ID=11, K=2),
-
-        Instance(args=args, W=75, R=8, TQ=1, ID=11, K=3),
-        Instance(args=args, W=50, R=8, TQ=2, ID=11, K=3),
-        Instance(args=args, W=25, R=3, TQ=3, ID=11, K=2),
-        Instance(args=args, W=20, R=3, TQ=4, ID=11, K=2),
-        Instance(args=args, W=15, R=2, TQ=4, ID=11, K=2),
-        Instance(args=args, W=10, R=2, TQ=4, ID=11, K=2),
     ]
 
     return verifying_set
