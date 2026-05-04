@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2025/6/3 9:38
 # @Author  : Dong Z.
-# @File    : main.py.py
+# @File    : main.py
 
 
 import argparse
